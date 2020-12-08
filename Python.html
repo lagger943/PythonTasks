@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Python.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+    word-wrap: break-word;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+    line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="python-setup">PYTHON SETUP</h1>
+<h3 id="1-python-setup---installing-python-step-by-step">1. Python Setup - Installing Python (Step By Step)</h3>
+<p>https://www.learningcrux.com/video/complete-python-bootcamp-go-from-zero-to-hero-in-python-3/1/1</p>
+<h3 id="2-python-setup---running-python-code">2. Python Setup - Running Python Code</h3>
+<p>https://www.learningcrux.com/video/complete-python-bootcamp-go-from-zero-to-hero-in-python-3/1/2
+<br>
+<br></p>
+<h4 id="important"><code>IMPORTANT</code></h4>
+<p>Use Jupyter Notebooks to complete all of the exercises and save them in separate <code>.ipynb</code> files by using <code>File &gt; Save as...</code> The notebooks are required for completing the course.
+<br>
+<br></p>
+<h1 id="python-object-and-data-structure-basics">PYTHON OBJECT AND DATA STRUCTURE BASICS</h1>
+<h3 id="overview-introduction-to-python-data-types">Overview:  Introduction To Python Data Types</h3>
+<p>https://www.learningcrux.com/video/complete-python-bootcamp-go-from-zero-to-hero-in-python-3/2/0
+<br>
+<br></p>
+<h2 id="1-python-numbers">1. Python Numbers</h2>
+<p>https://www.learningcrux.com/video/complete-python-bootcamp-go-from-zero-to-hero-in-python-3/2/1</p>
+<h4 id="exercise">Exercise:</h4>
+<p>Use these numbers <code>146</code>, <code>10</code>, <code>3</code>, <code>2</code> only once to get a result of <code>949</code>
+<br>
+<br></p>
+<h2 id="2-variable-assignments">2. Variable Assignments</h2>
+<p>https://www.learningcrux.com/video/complete-python-bootcamp-go-from-zero-to-hero-in-python-3/2/2</p>
+<h4 id="exercise">Exercise:</h4>
+<pre class="hljs"><code><div>price = <span class="hljs-number">40</span> <span class="hljs-comment">#DOLLARS</span>
+shipping_cost = <span class="hljs-number">5.5</span> <span class="hljs-comment">#EUROS</span>
+</div></code></pre>
+<p>Use the information from the last two lessons to display the product price with and without shipping cost in <code>BGN</code>
+<br>
+<br></p>
+<h2 id="3-introduction-to-strings">3. Introduction To Strings</h2>
+<p>https://www.learningcrux.com/video/complete-python-bootcamp-go-from-zero-to-hero-in-python-3/2/3</p>
+<h4 id="exercise">Exercise:</h4>
+<p>Create a variable called <code>title</code> and assign the value bellow to it and <code>print</code> the result <code>HP Envy x360 13-ar0435ng 'R5-3500U 8GB/256GB SSD 13&quot;FHD IPS Touch Windows 10' 8kf07ea#abd</code></p>
+<pre class="hljs"><code><div>HP Envy x360 13-ar0435ng 'R5-3500U 8GB/256GB SSD 13&quot;FHD IPS Touch Windows 10' 8kf07ea#abd
+</div></code></pre>
+<br>
+<h2 id="4-indexing-and-slicing-with-strings">4. Indexing And Slicing With Strings</h2>
+<p>https://www.learningcrux.com/video/complete-python-bootcamp-go-from-zero-to-hero-in-python-3/2/4</p>
+<h4 id="exercise">Exercise:</h4>
+<p>Using string slicing and this string:</p>
+<pre class="hljs"><code><div>string = <span class="hljs-string">"S$HkrH ellolwor lwdomrtlede!ad"</span>
+</div></code></pre>
+<p>print the string</p>
+<pre class="hljs"><code><div>Hello world!
+</div></code></pre>
+<br>
+<h2 id="5-string-properties-and-methods">5. String Properties And Methods</h2>
+<p>https://www.learningcrux.com/video/complete-python-bootcamp-go-from-zero-to-hero-in-python-3/2/5</p>
+<h4 id="exercise">Exercise:</h4>
+<pre class="hljs"><code><div>title = <span class="hljs-string">'Envy x360 13-ar0435ng R5-3500U 8GB/256GB SSD 13"FHD IPS Touch Windows 10'</span>
+brand = <span class="hljs-string">'Hp'</span>
+part_number = <span class="hljs-string">'8Kf07Ea#ABd'</span>
+</div></code></pre>
+<p>Add <code>brand</code> and <code>part_number</code> to <code>title</code> to get the result bellow:</p>
+<pre class="hljs"><code><div><span class="hljs-string">'HP Envy x360 13-ar0435ng R5-3500U 8GB/256GB SSD 13"FHD IPS Touch Windows 10 8kf07ea#abd'</span>
+</div></code></pre>
+<br>
+<h2 id="6-print-formatting-with-strings">6. Print Formatting With Strings</h2>
+<p>https://www.learningcrux.com/video/complete-python-bootcamp-go-from-zero-to-hero-in-python-3/2/6</p>
+<h4 id="exercise">Exercise:</h4>
+<p>Do the same exercise from lesson (5) but this time use both types of string formating to see the benefits and readibility of both
+<br>
+<br></p>
+<h2 id="7-lists-in-python">7. Lists In Python</h2>
+<p>https://www.learningcrux.com/video/complete-python-bootcamp-go-from-zero-to-hero-in-python-3/2/7</p>
+<h4 id="7a-methods-and-the-python-documentation">7.a. Methods And The Python Documentation</h4>
+<p>https://www.learningcrux.com/video/complete-python-bootcamp-go-from-zero-to-hero-in-python-3/5/0</p>
+<h4 id="exercise">Exercise:</h4>
+<pre class="hljs"><code><div>list_one = [<span class="hljs-string">'six'</span>, <span class="hljs-string">'three'</span>, <span class="hljs-string">'two'</span>, <span class="hljs-string">'one'</span>]
+list_two = [<span class="hljs-string">'four'</span>, <span class="hljs-string">'seven'</span>, <span class="hljs-string">'five'</span>]
+place_holder_one = <span class="hljs-literal">None</span>
+place_holder_two = <span class="hljs-literal">None</span>
+output = []
+</div></code></pre>
+<p>Use as many variables as you need to print the list</p>
+<pre class="hljs"><code><div>In [?]: print(output)
+Out [?]: [<span class="hljs-string">'one'</span>, <span class="hljs-string">'two'</span>, <span class="hljs-string">'three'</span>, <span class="hljs-string">'four'</span>, <span class="hljs-string">'five'</span>, <span class="hljs-string">'six'</span>]
+</div></code></pre>
+<p>it can be done in different ways so after you have one solution you can try and think of others.
+<br>
+<br></p>
+<h2 id="8-dictionaries-in-python">8. Dictionaries In Python</h2>
+<p>https://www.learningcrux.com/video/complete-python-bootcamp-go-from-zero-to-hero-in-python-3/2/8</p>
+<h4 id="exercise">Exercise:</h4>
+<p>Create a dictionary called <code>product</code> and add proper <code>key: value</code> pairs to it using the information bellow</p>
+<pre class="hljs"><code><div><span class="hljs-string">"hp"</span>
+<span class="hljs-string">'Envy x360 13-ar0435ng R5-3500U 8GB/256GB SSD 13"FHD IPS Touch Windows 10'</span>
+<span class="hljs-string">'8kf07ea#abd'</span>
+<span class="hljs-number">40.999999</span>
+<span class="hljs-number">5.5453</span>
+[<span class="hljs-string">'L.A.'</span>, <span class="hljs-string">'New York'</span>, <span class="hljs-string">'Texas'</span>]
+</div></code></pre>
+<p>After you have the information in one dictionary use string formatig to print the string:</p>
+<pre class="hljs"><code><div><span class="hljs-string">'The product: HP Envy x360 13-ar0435ng R5-3500U 8GB/256GB SSD 13"FHD IPS Touch Windows 10 8kf07ea#abd that costs 40.99 is available in New York with 5.5 shipping cost and with free shipping in L.A.'</span>
+</div></code></pre>
+<br>
+<h2 id="9-tuples-with-python">9. Tuples With Python</h2>
+<p>https://www.learningcrux.com/video/complete-python-bootcamp-go-from-zero-to-hero-in-python-3/2/9
+<br>
+<br></p>
+<h2 id="10-sets-in-python">10. Sets In Python</h2>
+<p>https://www.learningcrux.com/video/complete-python-bootcamp-go-from-zero-to-hero-in-python-3/2/10
+<br>
+<br></p>
+<h2 id="11-booleans-in-python">11. Booleans In Python</h2>
+<p>https://www.learningcrux.com/video/complete-python-bootcamp-go-from-zero-to-hero-in-python-3/2/11
+<br>
+<br></p>
+<h1 id="python-comparison-operators">Python Comparison Operators</h1>
+<h2 id="1-comparison-operators-in-python">1. Comparison Operators In Python</h2>
+<p>https://www.learningcrux.com/video/complete-python-bootcamp-go-from-zero-to-hero-in-python-3/3/0
+<br>
+<br></p>
+<h2 id="2-chaining-comparison-operators-in-python-with-logical-operators">2. Chaining Comparison Operators In Python With Logical Operators</h2>
+<p>https://www.learningcrux.com/video/complete-python-bootcamp-go-from-zero-to-hero-in-python-3/3/1
+<br>
+<br></p>
+<h1 id="python-statements">Python Statements</h1>
+<h2 id="1-if-elif-and-else-statements-in-python">1. If Elif And Else Statements In Python</h2>
+<p>https://www.learningcrux.com/video/complete-python-bootcamp-go-from-zero-to-hero-in-python-3/4/0</p>
+<h4 id="1a-useful-operators-in-python">1.a Useful Operators In Python</h4>
+<p>https://www.learningcrux.com/video/complete-python-bootcamp-go-from-zero-to-hero-in-python-3/4/3</p>
+<h3 id="exercise">Exercise:</h3>
+<pre class="hljs"><code><div>product = {
+    <span class="hljs-string">"title"</span>: <span class="hljs-string">"IdeaPad L340 Gaming Laptop, 15.6-Inch FHD (1920 X 1080) IPS Display, Intel Core i7-9750H Processor + Microsoft Office 365 Home with Auto-Renew"</span>,
+    <span class="hljs-string">"brand"</span>: <span class="hljs-string">"Lenovo"</span>,
+    <span class="hljs-string">"part_number"</span>: <span class="hljs-string">"KJT-00004"</span>,
+    <span class="hljs-string">"article_id"</span>: <span class="hljs-string">"B07MRFM1CJ"</span>,
+    <span class="hljs-string">"bw_uid"</span>: <span class="hljs-string">"B07MRFM1CJ"</span>,
+    <span class="hljs-string">"ean"</span>: <span class="hljs-string">"0889842369540"</span>,
+    <span class="hljs-string">"price"</span>: <span class="hljs-number">949</span>,
+    <span class="hljs-string">"bw_promotion"</span>: <span class="hljs-string">"false"</span>,
+    <span class="hljs-string">"old_price"</span>: <span class="hljs-string">"1399.00"</span>,
+    <span class="hljs-string">"entry_page_product"</span>: <span class="hljs-string">"laptop"</span>
+}
+price_difference = <span class="hljs-literal">None</span>
+</div></code></pre>
+<p>Write an if statement that changes <code>bw_promotion</code> to <code>'bundle'</code> by checking if the <code>title</code> contains <code>+ Microsoft Office</code>. Add <code>brand</code> and <code>part_number</code> to <code>title</code></p>
+<h4 id="input">Input</h4>
+<pre class="hljs"><code><div>print(<span class="hljs-string">f"The <span class="hljs-subst">{product[<span class="hljs-string">'entry_page_product'</span>]}</span> <span class="hljs-subst">{product[<span class="hljs-string">'title'</span>]}</span> that has a promotion of type <span class="hljs-subst">{product[<span class="hljs-string">'bw_promotion'</span>]}</span> used to cost <span class="hljs-subst">{product[<span class="hljs-string">'old_price'</span>]}</span> but now is <span class="hljs-subst">{price_difference}</span> cheaper."</span>)
+</div></code></pre>
+<h4 id="output">Output</h4>
+<pre class="hljs"><code><div>The laptop Lenovo IdeaPad L340 Gaming Laptop, 15.6-Inch FHD (1920 X 1080) IPS Display, Intel Core i7-9750H Processor + Microsoft Office 365 Home with Auto-Renew KJT-00004 that has a promotion of type bundle used to cost 1399.00 but now is 450.0 cheaper.
+</div></code></pre>
+<br>
+<h2 id="2-for-loops-in-python">2. For Loops In Python</h2>
+<p>https://www.learningcrux.com/video/complete-python-bootcamp-go-from-zero-to-hero-in-python-3/4/1</p>
+<h4 id="exercise">Exercise:</h4>
+<h4 id="bwpromotion-can-have-a-value-of-bundle-true-or-false"><code>bw_promotion</code> can have a value of <code>'bundle'</code>, <code>'true'</code> or <code>'false'</code></h4>
+<ul>
+<li><code>bundle</code>: if title contains <code>+ Microsoft Office</code></li>
+<li><code>true</code>: if the product is not a bundle and has <code>old_price</code></li>
+<li><code>false</code>: if the the above checks arent met</li>
+</ul>
+<h4 id="title-should-contain-partnumber-and-brand"><code>title</code>: should contain <code>part_number</code> and <code>brand</code></h4>
+<h4 id="bwuid-is-equal-to-articleid"><code>bw_uid</code>: is equal to article_id</h4>
+<p>Write a for loop that makes the necessary changes to the products list and <code>print</code> the products that have a <code>bw_uid</code></p>
+<pre class="hljs"><code><div>products = [
+    {
+        <span class="hljs-string">"title"</span>: <span class="hljs-string">"IdeaPad L340 Gaming Laptop, 15.6-Inch FHD (1920 X 1080) IPS Display, Intel Core i7-9750H Processor + Microsoft Office 365 Home with Auto-Renew"</span>,
+        <span class="hljs-string">"brand"</span>: <span class="hljs-string">"Lenovo"</span>,
+        <span class="hljs-string">"part_number"</span>: <span class="hljs-string">"KJT-00004"</span>,
+        <span class="hljs-string">"article_id"</span>: <span class="hljs-string">"B07MRFM1CJ"</span>,
+        <span class="hljs-string">"bw_uid"</span>: <span class="hljs-string">""</span>,
+        <span class="hljs-string">"ean"</span>: <span class="hljs-string">"0889842369540"</span>,
+        <span class="hljs-string">"price"</span>: <span class="hljs-number">949</span>,
+        <span class="hljs-string">"bw_promotion"</span>: <span class="hljs-string">"false"</span>,
+        <span class="hljs-string">"old_price"</span>: <span class="hljs-string">"1399.00"</span>,
+        <span class="hljs-string">"entry_page_product"</span>: <span class="hljs-string">"laptop"</span>
+    },
+    {
+        <span class="hljs-string">"title"</span>: <span class="hljs-string">"Inspiron 13 5000 2-in-1 - 13.3\" FHD Touch and Samsung 860 Evo 500GB 2.5 inch SATA III Internal SSD"</span>,
+        <span class="hljs-string">"brand"</span>: <span class="hljs-string">"Dell"</span>,
+        <span class="hljs-string">"part_number"</span>: <span class="hljs-string">"KJT-00016"</span>,
+        <span class="hljs-string">"article_id"</span>: <span class="hljs-string">""</span>,
+        <span class="hljs-string">"bw_uid"</span>: <span class="hljs-string">""</span>,
+        <span class="hljs-string">"ean"</span>: <span class="hljs-string">"08898425669540"</span>,
+        <span class="hljs-string">"price"</span>: <span class="hljs-number">1200</span>,
+        <span class="hljs-string">"bw_promotion"</span>: <span class="hljs-string">"false"</span>,
+        <span class="hljs-string">"old_price"</span>: <span class="hljs-string">""</span>,
+        <span class="hljs-string">"entry_page_product"</span>: <span class="hljs-string">"laptop"</span>
+    },
+    {
+        <span class="hljs-string">"title"</span>: <span class="hljs-string">"Blade 15 Gaming Laptop - Intel Core i7-8750H 6 Core + Microsoft Office 365 Home with Auto-Renew"</span>,
+        <span class="hljs-string">"brand"</span>: <span class="hljs-string">"Razer"</span>,
+        <span class="hljs-string">"article_id"</span>: <span class="hljs-string">"B08149JV6B"</span>,
+        <span class="hljs-string">"bw_uid"</span>: <span class="hljs-string">""</span>,
+        <span class="hljs-string">"price"</span>: <span class="hljs-number">1300</span>,
+        <span class="hljs-string">"bw_promotion"</span>: <span class="hljs-string">"false"</span>,
+        <span class="hljs-string">"old_price"</span>: <span class="hljs-string">"1600"</span>,
+        <span class="hljs-string">"entry_page_product"</span>: <span class="hljs-string">"laptop"</span>
+    }
+]
+</div></code></pre>
+<br>
+<h2 id="3-while-loops-in-python">3. While Loops In Python</h2>
+<p>https://www.learningcrux.com/video/complete-python-bootcamp-go-from-zero-to-hero-in-python-3/4/2
+<br>
+<br></p>
+<h2 id="4-list-comprehensions-in-python">4. List Comprehensions In Python</h2>
+<p>https://www.learningcrux.com/video/complete-python-bootcamp-go-from-zero-to-hero-in-python-3/4/4
+<br>
+<br></p>
+<h2 id="5-functions-in-python">5. Functions In Python</h2>
+<p>https://www.learningcrux.com/video/complete-python-bootcamp-go-from-zero-to-hero-in-python-3/5/1</p>
+<h3 id="exercise">Exercise:</h3>
+<p>Write the logic for the functions bellow and print all of the products that have a <code>bw_uid</code> with the <code>browswave_products</code> function:</p>
+<pre class="hljs"><code><div>products = [
+    {
+        <span class="hljs-string">"title"</span>: <span class="hljs-string">"IdeaPad L340 Gaming Laptop, 15.6-Inch FHD (1920 X 1080) IPS Display, Intel Core i7-9750H Processor + Microsoft Office 365 Home with Auto-Renew"</span>,
+        <span class="hljs-string">"brand"</span>: <span class="hljs-string">"Lenovo"</span>,
+        <span class="hljs-string">"part_number"</span>: <span class="hljs-string">"KJT-00004"</span>,
+        <span class="hljs-string">"article_id"</span>: <span class="hljs-string">"B07MRFM1CJ"</span>,
+        <span class="hljs-string">"bw_uid"</span>: <span class="hljs-string">""</span>,
+        <span class="hljs-string">"ean"</span>: <span class="hljs-string">"0889842369540"</span>,
+        <span class="hljs-string">"price"</span>: <span class="hljs-number">949</span>,
+        <span class="hljs-string">"bw_promotion"</span>: <span class="hljs-string">"false"</span>,
+        <span class="hljs-string">"old_price"</span>: <span class="hljs-string">"1399.00"</span>,
+        <span class="hljs-string">"entry_page_product"</span>: <span class="hljs-string">"laptop"</span>
+    },
+    {
+        <span class="hljs-string">"title"</span>: <span class="hljs-string">"Inspiron 13 5000 2-in-1 - 13.3\" FHD Touch and Samsung 860 Evo 500GB 2.5 inch SATA III Internal SSD"</span>,
+        <span class="hljs-string">"brand"</span>: <span class="hljs-string">"Dell"</span>,
+        <span class="hljs-string">"part_number"</span>: <span class="hljs-string">"KJT-00016"</span>,
+        <span class="hljs-string">"article_id"</span>: <span class="hljs-string">"B08170JV6B"</span>,
+        <span class="hljs-string">"bw_uid"</span>: <span class="hljs-string">""</span>,
+        <span class="hljs-string">"ean"</span>: <span class="hljs-string">"08898425669540"</span>,
+        <span class="hljs-string">"price"</span>: <span class="hljs-number">1200</span>,
+        <span class="hljs-string">"bw_promotion"</span>: <span class="hljs-string">"false"</span>,
+        <span class="hljs-string">"old_price"</span>: <span class="hljs-string">""</span>,
+        <span class="hljs-string">"entry_page_product"</span>: <span class="hljs-string">"laptop"</span>,
+        <span class="hljs-string">"images"</span>: [
+            <span class="hljs-string">"//images-na.ssl-images-amazon.com/images/I/51nUJKG2VGL._SL1000_.jpg"</span>,
+            <span class="hljs-string">"https://images-na.ssl-images-amazon.com/images/I/61A1tGq5q3L._SL1000_.jpg"</span>,
+            <span class="hljs-string">"/images-na.ssl-images-amazon.com/images/I/51RXnBkn6hL._SL1000_.jpg"</span>,
+            <span class="hljs-string">"https://images-na.ssl-images-amazon.com/images/I/61Y6Q2qCHOL._SL1500_.jpg"</span>,
+            <span class="hljs-string">"images-na.ssl-images-amazon.com/images/I/61qKz%2BI7mhL._SL1500_.jpg"</span>
+          ],
+    },
+    {
+        <span class="hljs-string">"title"</span>: <span class="hljs-string">"Blade 15 Gaming Laptop - Intel Core i7-8750H 6 Core + Microsoft Office 365 Home with Auto-Renew"</span>,
+        <span class="hljs-string">"brand"</span>: <span class="hljs-string">"Razer"</span>,
+        <span class="hljs-string">"article_id"</span>: <span class="hljs-string">""</span>,
+        <span class="hljs-string">"bw_uid"</span>: <span class="hljs-string">""</span>,
+        <span class="hljs-string">"price"</span>: <span class="hljs-number">1300</span>,
+        <span class="hljs-string">"bw_promotion"</span>: <span class="hljs-string">"false"</span>,
+        <span class="hljs-string">"old_price"</span>: <span class="hljs-string">"1600"</span>,
+        <span class="hljs-string">"entry_page_product"</span>: <span class="hljs-string">"laptop"</span>
+    },
+        {
+        <span class="hljs-string">"title"</span>: <span class="hljs-string">"Blade 17 Gaming Laptop - Intel Core i7-8750H 6 Core 40$ Cashback"</span>,
+        <span class="hljs-string">"brand"</span>: <span class="hljs-string">"Razer"</span>,
+        <span class="hljs-string">"article_id"</span>: <span class="hljs-string">"B08170JO4B"</span>,
+        <span class="hljs-string">"bw_uid"</span>: <span class="hljs-string">""</span>,
+        <span class="hljs-string">"price"</span>: <span class="hljs-number">1300</span>,
+        <span class="hljs-string">"bw_promotion"</span>: <span class="hljs-string">"false"</span>,
+        <span class="hljs-string">"old_price"</span>: <span class="hljs-string">""</span>,
+        <span class="hljs-string">"entry_page_product"</span>: <span class="hljs-string">"laptop"</span>
+    }
+]
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment"># Add brand and part_number to title</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_title</span><span class="hljs-params">(product)</span>
+    <span class="hljs-title">pass</span>
+</span></div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment"># Extract bw_promotion value: 'bundle', 'cashback', 'true' or 'false'</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">extract_promotion</span><span class="hljs-params">(product)</span>
+    <span class="hljs-title">pass</span>
+</span></div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment"># Add https:// to each product['images'] if its missing</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add_scheme_to_url</span><span class="hljs-params">(product)</span>
+    <span class="hljs-title">pass</span>
+</span></div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment"># Update bw_uid value</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_bw_uid</span><span class="hljs-params">(product)</span>
+    <span class="hljs-title">pass</span>
+</span></div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment"># Print the products with their normalized data</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">browswave_products</span><span class="hljs-params">(products)</span>
+    <span class="hljs-title">for</span> <span class="hljs-title">product</span> <span class="hljs-title">in</span> <span class="hljs-title">products</span>:</span>
+        <span class="hljs-keyword">pass</span>
+</div></code></pre>
+
+</body>
+</html>
