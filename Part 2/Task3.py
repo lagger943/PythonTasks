@@ -69,7 +69,6 @@ def extract_promotion(products):
             item['bw_promotion'] = "price"
         else:
             item['bw_promotion'] = "false"
-    pass
 
 def add_scheme_to_url(products):
     for item in products:
