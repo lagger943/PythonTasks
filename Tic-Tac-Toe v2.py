@@ -5,7 +5,7 @@ class TicTacToe:
     def __init__(self):
         self.GameBoard = [' ',' ',' ',' ',' ',' ',' ',' ',' ']
         self.PlayerPTS = 0
-        self.CompPTS = 0
+        self.CompPTS = 0       
     
     def PrintBoard(self):
         print(f" Your wins: {self.PlayerPTS} | Computer Wins: {self.CompPTS}")
@@ -64,16 +64,15 @@ def Start():
 
 def Game():
     Clear()
-    il = 0
-    if random.randint(1,20) > 10:
+    if random.randint(1,20) > 10: #Used to pick at random who will be first
         player = 1
     else: 
         player = 2
-    while il == 0:
-        gs = False
+    fullboard = False
+    while fullboard == False:
+        gs = False #Variable for selection check result
         winstate = False
-        fullboard = False
-        while gs == False:
+        while gs == False: #Promt for selection until it's right
             if player == 1:
                 Clear()
                 x.PrintBoard()
@@ -88,7 +87,7 @@ def Game():
                 number = random.randint(1,9)
                 selection = number - 1
                 gs = x.CheckValidity(selection)
-        x.MakeATurn(selection,player)
+        x.MakeATurn(selection,player) 
         winstate = x.CheckForWin(player)
         if winstate == True :
                 if player == 1:
@@ -103,7 +102,6 @@ def Game():
                     Clear()
                     x.PrintBoard()
                     print("Computer Wins!")
-                    
                     if input(" Press Enter to play again, any other key to quit!") == "":
                         x.ClearBoard()
                         Game()
