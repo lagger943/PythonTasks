@@ -3,117 +3,127 @@ import random
 
 class TicTacToe:
     def __init__(self):
-        self.GameBoard = [' ',' ',' ',' ',' ',' ',' ',' ',' ']
-        self.PlayerPTS = 0
-        self.CompPTS = 0       
+        self.game_board = [' ',' ',' ',' ',' ',' ',' ',' ',' ']
+        self.player_pts = 0
+        self.comp_pts = 0       
     
-    def PrintBoard(self):
-        print(f" Your wins: {self.PlayerPTS} | Computer Wins: {self.CompPTS}")
-        print(f"   ┌───┬───┬───┐\n   │ {self.GameBoard[6]} │ {self.GameBoard[7]} │ {self.GameBoard[8]} │\n   │───┼───┼───┤\n   │ {self.GameBoard[3]} │ {self.GameBoard[4]} │ {self.GameBoard[5]} │\n   ├───┼───┼───┤\n   │ {self.GameBoard[0]} │ {self.GameBoard[1]} │ {self.GameBoard[2]} │\n   └───┴───┴───┘\n",end='')
+    def print_board(self):
+        print(f" Your wins: {self.player_pts} | Computer Wins: {self.comp_pts}")
+        print(f"   ┌───┬───┬───┐\n   │ {self.game_board[6]} │ {self.game_board[7]} │ {self.game_board[8]} │\n   │───┼───┼───┤\n   │ {self.game_board[3]} │ {self.game_board[4]} │ {self.game_board[5]} │\n   ├───┼───┼───┤\n   │ {self.game_board[0]} │ {self.game_board[1]} │ {self.game_board[2]} │\n   └───┴───┴───┘\n",end='')
         
-    def AddPlayerPTS(self):
-        self.PlayerPTS = self.PlayerPTS + 1
+    def add_player_pts(self):
+        self.player_pts = self.player_pts + 1
     
-    def AddCompPTS(self):
-        self.CompPTS = self.CompPTS + 1
+    def add_comp_pts(self):
+        self.comp_pts = self.comp_pts + 1
     
-    def CheckValidity(self,selection):
-        if selection not in range(0,9) or self.GameBoard[selection] != ' ':
+    def check_validity(
+            self,selection):
+        if selection not in range(0,9) 
+                or self.game_board[selection] != ' ':
             return False
         else: 
             return True
             
-    def MakeATurn(self,selection,player):
+    def make_turn(
+            self,selection,player):
         if player == 1:
-            self.GameBoard[selection] = 'X'
+            self.game_board[selection] = 'X'
         else:
-            self.GameBoard[selection] = '0'
+            self.game_board[selection] = '0'
     
-    def CheckForWin(self,player):
-        if self.GameBoard[6] == self.GameBoard[7] == self.GameBoard[8] != ' ' or self.GameBoard[3] == self.GameBoard[4] == self.GameBoard[5] != ' ' or self.GameBoard[0] == self.GameBoard[1] == self.GameBoard[2] != ' ' or self.GameBoard[8] == self.GameBoard[5] == self.GameBoard[2] != ' ' or self.GameBoard[7] == self.GameBoard[4] == self.GameBoard[1] != ' ' or self.GameBoard[6] == self.GameBoard[3] == self.GameBoard[0] != ' ' or self.GameBoard[0] == self.GameBoard[4] == self.GameBoard[8] != ' ' or self.GameBoard[6] == self.GameBoard[4] == self.GameBoard[2] != ' ':
+    def check_for_win(
+            self,player):
+        if self.game_board[6] == self.game_board[7] == self.game_board[8] != ' ' 
+                or self.game_board[3] == self.game_board[4] == self.game_board[5] != ' ' 
+                or self.game_board[0] == self.game_board[1] == self.game_board[2] != ' ' 
+                or self.game_board[8] == self.game_board[5] == self.game_board[2] != ' ' 
+                or self.game_board[7] == self.game_board[4] == self.game_board[1] != ' ' 
+                or self.game_board[6] == self.game_board[3] == self.game_board[0] != ' ' 
+                or self.game_board[0] == self.game_board[4] == self.game_board[8] != ' ' 
+                or self.game_board[6] == self.game_board[4] == self.game_board[2] != ' ':
             if player == 1:
-                self.AddPlayerPTS()
+                self.add_player_pts()
             else:
-                self.AddCompPTS()
+                self.add_comp_pts()
             return True
         else:
             return False
             
-    def CheckForFullBoard(self):
-            if ' ' not in self.GameBoard:
-                return True
-            else:
-                return False
+    def check_full_board(self):
+        if ' ' not in self.game_board:
+            return True
+        else:
+            return False
                 
-    def ClearBoard(self):
-        for i in range(len(self.GameBoard)):
-            self.GameBoard[i] = ' '
+    def clear_board(self):
+        for i in range(len(self.game_board)):
+            self.game_board[i] = ' '
             
-def Clear(): 
+def clear(): 
     if os.name == 'nt': 
         _ = os.system('cls')  
     else: 
-        _ = os.system('Clear') 
+        _ = os.system('clear_board') 
         
-def Start():
+def start():
     print("\n")
     print("\t\t\t\t▓▓▓▓▓ ▓ ▓▓▓▓   ▓▓▓▓▓   ▓   ▓▓▓▓▓   ▓▓▓▓▓ ▓▓▓▓▓ ▓▓▓▓▓\n\t\t\t\t  ▓     ▓        ▓    ▓ ▓  ▓         ▓   ▓   ▓ ▓    \n\t\t\t\t  ▓   ▓ ▓    ▓   ▓   ▓   ▓ ▓     ▓   ▓   ▓   ▓ ▓▓▓▓▓\n\t\t\t\t  ▓   ▓ ▓        ▓   ▓▓▓▓▓ ▓         ▓   ▓   ▓ ▓    \n\t\t\t\t  ▓   ▓ ▓▓▓▓     ▓   ▓   ▓ ▓▓▓▓▓     ▓   ▓▓▓▓▓ ▓▓▓▓▓\n")
     print("\n How to play:\n You play this game with numpad of the keyboard. Number placement corresponds to the columns in the game. Example:\n",end='')
     print("   ┌───┬───┬───┐\n   │ 7 │ 8 │ 9 │\n   │───┼───┼───┤\n   │ 4 │ 5 │ 6 │\n   ├───┼───┼───┤\n   │ 1 │ 2 │ 3 │\n   └───┴───┴───┘\n",end='')
     os.system("pause")
 
-def Game():
-    Clear()
+def game():
+    clear()
     if random.randint(1,20) > 10: #Used to pick at random who will be first
         player = 1
     else: 
         player = 2
-    fullboard = False
-    while fullboard == False:
-        gs = False #Variable for selection check result
-        winstate = False
-        while gs == False: #Promt for selection until it's right
+    full_board = False
+    while full_board == False:
+        good_selection = False #Variable for selection check result
+        win_state = False
+        while good_selection == False: #Promt for selection until it's right
             if player == 1:
-                Clear()
-                x.PrintBoard()
-                pinput = input(" Enter your choice:")
-                if pinput == "":
-                    Clear()
+                clear()
+                x.print_board()
+                p_input = input(" Enter your choice:")
+                if p_input == "":
+                    clear_board()
                     continue
-                selection = int(pinput) - 1
-                gs = x.CheckValidity(selection)
+                selection = int(p_input) - 1
+                good_selection = x.check_validity(selection)
                 
             else:
-                number = random.randint(1,9)
-                selection = number - 1
-                gs = x.CheckValidity(selection)
-        x.MakeATurn(selection,player) 
-        winstate = x.CheckForWin(player)
-        if winstate == True :
+                selection = random.randint(1,9) - 1
+                good_selection = x.check_validity(selection)
+        x.make_turn(selection,player) 
+        win_state = x.check_for_win(player)
+        if win_state == True :
                 if player == 1:
-                    Clear()
-                    x.PrintBoard()
+                    clear()
+                    x.print_board()
                     print("You Win!")
                     if input(" Press Enter to play again, any other key to quit!") == "":
-                        x.ClearBoard()
-                        Game()
+                        x.clear_board()
+                        game()
                     break
                 else:
-                    Clear()
-                    x.PrintBoard()
+                    clear()
+                    x.print_board()
                     print("Computer Wins!")
                     if input(" Press Enter to play again, any other key to quit!") == "":
-                        x.ClearBoard()
-                        Game()
+                        x.clear_board()
+                        game()
                     break
-        fullboard = x.CheckForFullBoard()
-        if fullboard == True:
-                Clear()
-                x.PrintBoard()
+        full_board = x.check_full_board()
+        if full_board == True:
+                clear()
+                x.print_board()
                 print("Nobody Wins!")
                 if input(" Press Enter to play again, any other key to quit!") == "":
-                    x.ClearBoard()
-                    Game()
+                    x.clear_board_()
+                    game()
                 break
         else:
             if player == 1: 
@@ -121,7 +131,7 @@ def Game():
             else: 
                 player = 1
      
-Start()
+start()
 x = TicTacToe()
-Game()
+game()
     
