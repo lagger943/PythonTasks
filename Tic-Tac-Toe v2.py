@@ -19,8 +19,8 @@ class TicTacToe:
     
     def check_validity(
             self,selection):
-        if selection not in range(0,9) 
-                or self.game_board[selection] != ' ':
+        if (selection not in range(0,9) 
+                or self.game_board[selection] != ' '):
             return False
         else: 
             return True
@@ -34,14 +34,14 @@ class TicTacToe:
     
     def check_for_win(
             self,player):
-        if self.game_board[6] == self.game_board[7] == self.game_board[8] != ' ' 
+        if (self.game_board[6] == self.game_board[7] == self.game_board[8] != ' ' 
                 or self.game_board[3] == self.game_board[4] == self.game_board[5] != ' ' 
                 or self.game_board[0] == self.game_board[1] == self.game_board[2] != ' ' 
                 or self.game_board[8] == self.game_board[5] == self.game_board[2] != ' ' 
                 or self.game_board[7] == self.game_board[4] == self.game_board[1] != ' ' 
                 or self.game_board[6] == self.game_board[3] == self.game_board[0] != ' ' 
                 or self.game_board[0] == self.game_board[4] == self.game_board[8] != ' ' 
-                or self.game_board[6] == self.game_board[4] == self.game_board[2] != ' ':
+                or self.game_board[6] == self.game_board[4] == self.game_board[2] != ' '):
             if player == 1:
                 self.add_player_pts()
             else:
@@ -51,10 +51,10 @@ class TicTacToe:
             return False
             
     def check_full_board(self):
-        if ' ' not in self.game_board:
-            return True
-        else:
-            return False
+            if ' ' not in self.game_board:
+                return True
+            else:
+                return False
                 
     def clear_board(self):
         for i in range(len(self.game_board)):
