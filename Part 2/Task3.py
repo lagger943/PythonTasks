@@ -28,7 +28,7 @@ products = [
             "/images-na.ssl-images-amazon.com/images/I/51RXnBkn6hL._SL1000_.jpg",
             "https://images-na.ssl-images-amazon.com/images/I/61Y6Q2qCHOL._SL1500_.jpg",
             "images-na.ssl-images-amazon.com/images/I/61qKz%2BI7mhL._SL1500_.jpg"
-          ],
+        ],
     },
     {
         "title": "Blade 15 Gaming Laptop - Intel Core i7-8750H 6 Core + Microsoft Office 365 Home with Auto-Renew",
@@ -40,7 +40,7 @@ products = [
         "old_price": "1600",
         "entry_page_product": "laptop"
     },
-        {
+    {
         "title": "Blade 17 Gaming Laptop - Intel Core i7-8750H 6 Core 40$ Cashback",
         "brand": "Razer",
         "article_id": "B08170JO4B",
@@ -51,50 +51,49 @@ products = [
         "entry_page_product": "laptop"
     }
 ]
-def update_title(products):
-   for item in products:
-    if 'part_number' in item.keys():
-       item['title'] = item['brand'] + " " +item['title'] + " " + item['part_number']
+def update_title(product):
+    if 'part_number' in product.keys():
+            product['title'] = product['brand'] + " " + product['title'] + " " + product['part_number']
     else:
-        item['title'] = item['brand'] + " " + item['title']
-   item['bw_uid'] = item["article_id"]
-
-def extract_promotion(products):
-    for item in products:
-        if "+Microsoft Office" in item['title']:
-            item['bw_promotion'] = "bundle"
-        elif "Cashback" in item['title']:
-           item['bw_promotion'] = "cashback"
-        elif item['old_price'] != "":
-            item['bw_promotion'] = "price"
-        else:
-            item['bw_promotion'] = "false"
-
-def add_scheme_to_url(products):
-    for item in products:
-        if 'images' in item.keys():
-            for idp, url in enumerate(item['images']):
-                if item['images'][idp][0] ==item['images'][idp][1] == "/":
-                    item['images'][idp] = "https:" + item['images'][idp]
-                elif item['images'][idp] == "/" and item['images'][idp][0] != item['images'][idp][1]:
-                   item['images'][idp] = "https:/" + item['images'][idp]
-                elif "https://" in url:
-                    item['images'][idp]=item['images'][idp]
-                else:
-                   item['images'][idp] = "https://" + item['images'][idp]      
+            product['title'] = product['brand'] + " " + product['title']
+    product['bw_uid'] = product["article_id"]
 
 
-def update_bw_uid(products):
-     for item in products:
-        if item['article_id'] != "":
-            item['bw_id'] =item['article_id']
+def extract_promotion(product):
+    if "+Microsoft Office" in product['title']:
+        product['bw_promotion'] = "bundle"
+    elif "Cashback" in product['title']:
+        product['bw_promotion'] = "cashback"
+    elif product['old_price'] != "":
+        product['bw_promotion'] = "price"
+    else:
+        product['bw_promotion'] = "false"
+
+def add_scheme_to_url(product):
+    if 'images' in product.keys():
+        for idp, url in enumerate(item['images']):
+            if product['images'][idp][0] == product['images'][idp][1] == "/":
+                    product['images'][idp] = "https:" + product['images'][idp]
+            elif product['images'][idp] == "/" and product['images'][idp][0] != product['images'][idp][1]:
+                    product['images'][idp] = "https:/" + product['images'][idp]
+            elif "https://" in url:
+                    product['images'][idp] = product['images'][idp]
+            else:
+                product['images'][idp] = "https://" + product['images'][idp]
+
+
+def update_bw_uid(product):
+    if product['article_id'] != "":
+        product['bw_id'] = product['article_id']
+
 
 def browswave_products(products):
     for item in products:
         print(item)
-    
-update_title(products)
-extract_promotion(products)
-add_scheme_to_url(products)
-update_bw_uid(products)
+
+for item in products:
+    update_title(item)
+    extract_promotion(item)
+    add_scheme_to_url(item)
+    update_bw_uid(item)
 browswave_products(products)
